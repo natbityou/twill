@@ -49,6 +49,16 @@
                                   :isActive="editor.isActive('underline')"
                                   @btn:click="editor.chain().focus().toggleUnderline().run()"/>
 
+            <wysiwyg-menu-bar-btn icon="subscript"
+                                  v-if="toolbar.script"
+                                  :isActive="editor.isActive('subscript')"
+                                  @btn:click="editor.chain().focus().toggleSubscript().run()"/>
+
+            <wysiwyg-menu-bar-btn icon="superscript"
+                                  v-if="toolbar.script"
+                                  :isActive="editor.isActive('superscript')"
+                                  @btn:click="editor.chain().focus().toggleSuperscript().run()"/>
+            
             <wysiwyg-menu-bar-btn icon="hr"
                                   v-if="toolbar.hr"
                                   @btn:click="editor.chain().focus().setHorizontalRule().run()"/>
@@ -252,6 +262,8 @@
   import {Placeholder} from "@tiptap/extension-placeholder";
   import {HardBreak} from "@tiptap/extension-hard-break";
   import {HorizontalRule} from "@tiptap/extension-horizontal-rule";
+  import {Subscript} from '@tiptap/extension-subscript'
+  import {Superscript} from '@tiptap/extension-superscript'
   import {TextAlign} from '@tiptap/extension-text-align';
 
   export default {
@@ -607,6 +619,12 @@
           }
           case 'hr': {
             extensions.push(HorizontalRule)
+            break
+          }
+          case 'script': {
+            extensions.push(Subscript)
+            extensions.push(Superscript)
+            break
           }
         }
       })
